@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מרכז הלמידה שלי · Study Hub</title>
+<meta name="description" content="מרכז למידה אישי: קישורים לכלי יצירה והסבר, סיכומים קצרים ומשימות. אתר תמיכה בלימודים.">
+<meta name="rating" content="general">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0f172a">
+<meta property="og:title" content="מרכז הלמידה שלי">
+<meta property="og:description" content="כלים וקישורים ללימודים, פרויקטים ומשימות.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='80' font-size='80'>📚</text></svg>">
+<style>
+  :root{--bg:#0f172a;--card:#1b2537;--txt:#e8eefc;--muted:#9fb0cc;--acc:#5b8cff}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,"Segoe UI",Rubik,Arial,sans-serif;background:var(--bg);color:var(--txt)}
+  header{padding:18px 20px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;border-bottom:1px solid #24314a}
+  h1{font-size:19px;margin:0}
+  .pill{font-size:12px;color:var(--muted);border:1px solid #2c3a55;border-radius:999px;padding:4px 10px}
+  main{display:grid;grid-template-columns:1fr 320px;gap:16px;padding:16px;max-width:1400px;margin:auto}
+  @media(max-width:900px){main{grid-template-columns:1fr}}
+  .frame-card{background:var(--card);border:1px solid #24314a;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;min-height:70vh}
+  .bar{display:flex;gap:8px;align-items:center;padding:10px;border-bottom:1px solid #24314a;flex-wrap:wrap}
+  .btn{background:var(--acc);color:#fff;text-decoration:none;border:0;border-radius:9px;padding:9px 14px;font-size:14px;cursor:pointer}
+  .btn.ghost{background:#22304a;color:var(--txt)}
+  iframe{flex:1;width:100%;min-height:66vh;border:0;background:#fff}
+  aside{display:flex;flex-direction:column;gap:10px}
+  .link{display:block;background:var(--card);border:1px solid #24314a;border-radius:12px;padding:12px 14px;color:var(--txt);text-decoration:none;font-size:14px}
+  .link small{display:block;color:var(--muted);margin-top:4px;font-size:12px}
+  footer{color:var(--muted);font-size:12px;text-align:center;padding:18px}
+</style>
+</head>
+<body>
+<header>
+  <h1>📚 מרכז הלמידה שלי</h1>
+  <span class="pill">כלים · סרטוני הסבר · משימות</span>
+</header>
+
+<main>
+  <section class="frame-card">
+    <div class="bar">
+      <a class="btn" href="https://flow.google.com/" target="_blank" rel="noopener">פתח בכרטיסייה חדשה</a>
+      <button class="btn ghost" id="reload">רענן</button>
+      <span class="pill" id="hint">אם המסגרת ריקה — השתמש בכפתור הפתיחה</span>
+    </div>
+    <iframe id="flow" src="https://flow.google.com/"
+      allow="clipboard-write; fullscreen; camera; microphone; autoplay"
+      referrerpolicy="no-referrer-when-downgrade" title="כלי יצירת וידאו"></iframe>
+  </section>
+
+  <aside>
+    <a class="link" href="https://flow.google.com/" target="_blank" rel="noopener">סטודיו וידאו<small>יצירת סרטונים קצרים מפרומפט</small></a>
+    <a class="link" href="https://gemini.google.com/" target="_blank" rel="noopener">עוזר כתיבה<small>ניסוח, סיכום, תרגול</small></a>
+    <a class="link" href="https://notebooklm.google.com/" target="_blank" rel="noopener">מחברת מחקרית<small>סיכום מקורות וקובצי לימוד</small></a>
+    <a class="link" href="https://www.google.com/" target="_blank" rel="noopener">חיפוש<small>מקורות והפניות</small></a>
+  </aside>
+</main>
+
+<footer>מרכז למידה אישי · נבנה לצורכי לימוד ותרגול</footer>
+
+<script>
+  const f = document.getElementById('flow');
+  document.getElementById('reload').onclick = () => f.src = f.src;
+  setTimeout(() => {
+    try {
+      if (!f.contentWindow || f.contentWindow.length === 0) {
+        document.getElementById('hint').textContent = 'המסגרת לא נטענה — פתח בכרטיסייה חדשה';
+      }
+    } catch (e) {}
+  }, 4000);
+  if (new URLSearchParams(location.search).get('go') === '1') {
+    setTimeout(() => window.open('https://flow.google.com/', '_blank'), 200);
+  }
+</script>
+</body>
+</html>
